@@ -1,5 +1,7 @@
 # shopping_cart.py
 
+from datetime import datetime
+
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
     {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
@@ -24,32 +26,49 @@ products = [
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
 
-def to_usd(my_price):
-    """
-    Converts a numeric value to usd-formatted string, for printing and display purposes.
+#def to_usd(my_price):
+#    """
+#    Converts a numeric value to usd-formatted string, for printing and display purposes.
+#
+#    Param: my_price (int or float) like 4000.444444
+#
+#    Example: to_usd(4000.444444)
+#
+#    Returns: $4,000.44
+#    """
+#    return f"${my_price:,.2f}" #> $12,000.71
 
-    Param: my_price (int or float) like 4000.444444
-
-    Example: to_usd(4000.444444)
-
-    Returns: $4,000.44
-    """
-    return f"${my_price:,.2f}" #> $12,000.71
 
 
-# TODO: write some Python code here to produce the desired output
-
-total_owed = 0
+subtotal = 0
+entered_ids = []
 
 while True:
     entered_id = input("Please enter your product ID, or when finished, say DONE:")
     if entered_id == "DONE":
         break
     else:
-        chosen_products = [p for p in products if str(p["id"]) == entered_id]
-        chosen_product = chosen_products[0]
-        total_owed = total_owed + chosen_product["price"]
-        print("PRODUCT ENTERED: " + chosen_product["name"] + "....." + str(chosen_product["price"]))
+        entered_ids.append(entered_id)
 
 
-print("YOUR TOTAL IS:" + str(total_owed)) ##need to format as USD (to_usd)
+for entered_id in entered_ids:
+    chosen_products = [p for p in products if str(p["id"]) == entered_id]
+    chosen_product = chosen_products[0]
+    subtotal = subtotal + chosen_product["price"]
+    print("PRODUCT: " + chosen_product["name"] + "....." + str(chosen_product["price"]))
+
+
+print("YOUR SUBTOTAL IS:")
+
+
+#need to format product prices as USD (to_usd)
+#need to format final subtotal as USD
+#need to add tax
+#need to add data validation for entered product ID
+
+print("Thanks for choosing Farm to Table Grocery!")
+print("farmtotablegrocery.com | (202) 785-3002")
+
+now = datetime.now()
+dt_string = now.strftime("%m/%d/%Y | %H:%M:%S")
+print(dt_string)
