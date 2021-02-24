@@ -39,6 +39,8 @@ def to_usd(my_price):
 
 # TODO: write some Python code here to produce the desired output
 
+total_owed = 0
+
 while True:
     entered_id = input("Please enter your product ID, or when finished, say DONE:")
     if entered_id == "DONE":
@@ -46,4 +48,8 @@ while True:
     else:
         chosen_products = [p for p in products if str(p["id"]) == entered_id]
         chosen_product = chosen_products[0]
+        total_owed = total_owed + chosen_product["price"]
         print("PRODUCT ENTERED: " + chosen_product["name"] + "....." + str(chosen_product["price"]))
+
+
+print("YOUR TOTAL IS:" + str(total_owed)) ##need to format as USD (to_usd)
