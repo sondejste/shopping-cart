@@ -41,5 +41,7 @@ def to_usd(my_price):
 
 #print(products)
 
-entered_id = input("Please enter a product ID:")
-print(entered_id)
+entered_id = input("Please enter your product ID:")
+chosen_products = [p for p in products if str(p["id"]) == entered_id]
+chosen_product = chosen_products[0]
+print("PRODUCT ENTERED: " + chosen_product["name"] + "....." + str(chosen_product["price"]))
