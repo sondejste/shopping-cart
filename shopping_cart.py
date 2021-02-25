@@ -1,7 +1,5 @@
 # shopping_cart.py
 
-from datetime import datetime
-
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
     {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
@@ -26,14 +24,13 @@ products = [
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
 
-#def to_usd(my_price):
-#    return f"${my_price:,.2f}"
-
-
+#SETUP
+from datetime import datetime
 
 subtotal = 0
 entered_ids = []
 
+#USER PROMPT
 while True:
     entered_id = input("Please enter your product ID, or when finished, say DONE:")
     if entered_id == "DONE":
@@ -41,24 +38,29 @@ while True:
     else:
         entered_ids.append(entered_id)
 
+####NEED TO ADD DATA VALIDATION (Values between 1 and 20) WITH FRIENDLY USER ERROR PROMPT IF ENTERED INCORRECTLY
+
+#WELCOME
+print("**********************")
 print("FARM TO TABLE GROCERY")
 print("farmtotablegrocery.com | (202) 785-3002")
 print("**********************")
+
+#CURRENT TIME AND DATE
 now = datetime.now()
 dt_string = now.strftime("%m/%d/%Y at %H:%M:%S")
 print("CHECKOUT TIME: " + dt_string)
 print("**********************")
 
-
+#PRODUCT LIST WITH PRICES IN USD
 for entered_id in entered_ids:
     chosen_products = [p for p in products if str(p["id"]) == entered_id]
     chosen_product = chosen_products[0]
     subtotal = subtotal + chosen_product["price"]
     product_price = "${:,.2f}".format(chosen_product["price"])
     print("PRODUCT: " + chosen_product["name"] + "....." + str(product_price))
-
-
 print("**********************")
+
 #SUBTOTAL
 sub = "${:,.2f}".format(subtotal)
 print("SUBTOTAL: " + str(sub))
@@ -73,12 +75,6 @@ print("TAX: " + str(taxes))
 final_price = float(subtotal) + tax
 total = "${:,.2f}".format(final_price)
 print("TOTAL: " + str(total))
-
-
-#need to format product prices as USD (to_usd)
-#need to format final subtotal as USD
-#need to add tax
-#need to add data validation for entered product ID
 
 #BYE!
 print("**********************")
