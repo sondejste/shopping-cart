@@ -27,16 +27,7 @@ products = [
 
 
 #def to_usd(my_price):
-#    """
-#    Converts a numeric value to usd-formatted string, for printing and display purposes.
-#
-#    Param: my_price (int or float) like 4000.444444
-#
-#    Example: to_usd(4000.444444)
-#
-#    Returns: $4,000.44
-#    """
-#    return f"${my_price:,.2f}" #> $12,000.71
+#    return f"${my_price:,.2f}"
 
 
 
@@ -50,15 +41,38 @@ while True:
     else:
         entered_ids.append(entered_id)
 
+print("FARM TO TABLE GROCERY")
+print("farmtotablegrocery.com | (202) 785-3002")
+print("**********************")
+now = datetime.now()
+dt_string = now.strftime("%m/%d/%Y at %H:%M:%S")
+print("CHECKOUT TIME: " + dt_string)
+print("**********************")
+
 
 for entered_id in entered_ids:
     chosen_products = [p for p in products if str(p["id"]) == entered_id]
     chosen_product = chosen_products[0]
     subtotal = subtotal + chosen_product["price"]
-    print("PRODUCT: " + chosen_product["name"] + "....." + str(chosen_product["price"]))
+    product_price = "${:,.2f}".format(chosen_product["price"])
+    print("PRODUCT: " + chosen_product["name"] + "....." + str(product_price))
 
 
-print("YOUR SUBTOTAL IS:")
+print("**********************")
+#SUBTOTAL
+sub = "${:,.2f}".format(subtotal)
+print("SUBTOTAL: " + str(sub))
+
+#TAX
+tax_rate = .0875
+tax = float(subtotal) * tax_rate
+taxes = "${:,.2f}".format(tax)
+print("TAX: " + str(taxes))
+
+#TOTAL
+final_price = float(subtotal) + tax
+total = "${:,.2f}".format(final_price)
+print("TOTAL: " + str(total))
 
 
 #need to format product prices as USD (to_usd)
@@ -66,9 +80,7 @@ print("YOUR SUBTOTAL IS:")
 #need to add tax
 #need to add data validation for entered product ID
 
+#BYE!
+print("**********************")
 print("Thanks for choosing Farm to Table Grocery!")
-print("farmtotablegrocery.com | (202) 785-3002")
-
-now = datetime.now()
-dt_string = now.strftime("%m/%d/%Y | %H:%M:%S")
-print(dt_string)
+print("**********************")
