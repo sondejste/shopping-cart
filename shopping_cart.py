@@ -26,19 +26,25 @@ products = [
 
 #SETUP
 from datetime import datetime
+from dotenv import load_dotenv
+import os
 
 subtotal = 0
 entered_ids = []
 
 #USER PROMPT
+id_values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
 while True:
     entered_id = input("Please enter your product ID, or when finished, say DONE:")
     if entered_id == "DONE":
         break
-    else:
+    elif entered_id in id_values:
         entered_ids.append(entered_id)
+    else:
+        print("Oops! ID values must be whole numbers between 1 and 20. Please begin again.")
+        exit()
+            #there has to be a better way than forcing them to restart. find one?
 
-####NEED TO ADD DATA VALIDATION (Values between 1 and 20) WITH FRIENDLY USER ERROR PROMPT IF ENTERED INCORRECTLY
 
 #WELCOME
 print("**********************")
@@ -66,8 +72,13 @@ sub = "${:,.2f}".format(subtotal)
 print("SUBTOTAL: " + str(sub))
 
 #TAX
-tax_rate = .0875
-tax = float(subtotal) * tax_rate
+###consider making tax rate variable with an ENV file - extra credit and shouldn't be too difficult. - need to include
+###.env filetype setup instructions in README
+
+load_dotenv()
+tax_rate = os.getenv("TAX_RATE", default = .0875)
+#consider removing default value if .env is shown to work every time.
+tax = float(subtotal) * float(tax_rate)
 taxes = "${:,.2f}".format(tax)
 print("TAX: " + str(taxes))
 
