@@ -76,7 +76,7 @@ print("SUBTOTAL: " + str(sub))
 ###.env filetype setup instructions in README
 
 load_dotenv()
-tax_rate = os.getenv("TAX_RATE", default = .0875)
+tax_rate = os.getenv("TAX_RATE")
 #consider removing default value if .env is shown to work every time.
 tax = float(subtotal) * float(tax_rate)
 taxes = "${:,.2f}".format(tax)
